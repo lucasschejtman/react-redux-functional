@@ -1,53 +1,35 @@
+import R from 'ramda';
+import * as Ru from '../../../utils/ramda-utils';
 import * as t from '../actions/actionTypes';
 import { handleActions } from 'redux-actions';
+import initialState from './initialState';
 
-const initialState = {
-	todos: [
-		{
-			id: 1,
-			name: 'react',
-			completed: true
-		},
-		{
-			id: 2,
-			name: 'redux',
-			completed: false
-		}
-	]
+// TODO: Maybe a todo model ?
+const transformCompleted = R.evolve({ completed: R.not });
+
+const toggleCompleted = (todos, todo) => {
+	const todoLens = Ru.lensById(todo.id);
+	return R.set(todoLens, transformCompleted(todo), todos);
 };
 
-const todo = (state, action) => {
-	switch (action.type) {
-		case t.ADD:
-			return {
-				id: 3,
-				name: action.payload,
-				complete: false
-			};
-		case t.TOGGLE_COMPLETE:
-			if (state.id !== action.payload) {
-				return state;
-			}
+const removeTodo = (state, id) => {
+	return Ru.rejectById(id, state.todos);
+};
 
-			return Object.assign({}, state, {
-				completed: !state.completed
-			});
-		case t.REMOVE:
-			return state.id !== action.payload;
-		default:
-			return state;
-	}
+const addTodo = (todos, todo) => {
+	const toInsert = { id: Math.random(), ...todo, completed: false };
+	return R.insert(todos.length, toInsert, todos);
 };
 
 const reducer = handleActions({
 	[t.ADD]: (state, action) => ({
-		todos: [...state, todo(undefined, action)]
+		todos: addTodo(state.todos, action.payload)
 	}),
 	[t.TOGGLE_COMPLETE]: (state, action) => ({
-		todos: state.todos.map(td => todo(td, action))
+		todos: toggleCompleted(state.todos, action.payload)
 	}),
 	[t.REMOVE]: (state, action) => ({
-		todos: state.todos.filter(td => todo(td, action))
+		todos: removeTodo(state, action.payload)
 	})
 }, initialState);
 

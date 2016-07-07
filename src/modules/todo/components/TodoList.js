@@ -1,15 +1,19 @@
 import React, { PropTypes } from 'react';
 import TodoItem from './TodoItem';
-import {List} from 'material-ui/List';
+import TodoForm from './TodoForm';
+import { List } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 
-const TodoList = ({ todos, onTodoClick, onDeleteClick }) => (
+const TodoList = ({ todos, onTodoAdd, onTodoClick, onTodoDelete }) => (
 	<List>
 		<Subheader>TODO</Subheader>
-		{ todos.map(todo =>
+		<TodoForm onSubmit={onTodoAdd} />
+		{
+			todos.map(todo =>
 			<TodoItem key={todo.id} {...todo}
-				onClick={() => onTodoClick(todo.id)}
-				onDelete={() => onDeleteClick(todo.id)} />) }
+				onClick={() => onTodoClick(todo)}
+				onDelete={() => onTodoDelete(todo.id)} />) 
+		}
 	</List>
 );
 
@@ -19,8 +23,9 @@ TodoList.propTypes = {
 		name: PropTypes.string.isRequired,
 		completed: PropTypes.bool.isRequired
 	}).isRequired).isRequired,
+	onTodoAdd: PropTypes.func.isRequired,
 	onTodoClick: PropTypes.func.isRequired,
-	onDeleteClick: PropTypes.func.isRequired
+	onTodoDelete: PropTypes.func.isRequired
 };
 
 export default TodoList;

@@ -1,21 +1,17 @@
+import R from 'ramda';
 import { connect } from 'react-redux';
 import TodoList from '../components/TodoList';
 import * as actions from '../actions/actions';
 
 const mapStateToProps = (state) => {
-	return {
-		...state.todos
-	};
+	return R.pick(['todos'], state.todos);
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onTodoClick: (id) => {
-			dispatch(actions.toggle(id));
-		},
-		onDeleteClick: (id) => {
-			dispatch(actions.remove(id));
-		}
+		onTodoAdd: todo => dispatch(actions.add(todo)),
+		onTodoClick: todo => dispatch(actions.toggle(todo)),
+		onTodoDelete: id => dispatch(actions.remove(id))
 	};
 }
 
