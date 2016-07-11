@@ -1,18 +1,19 @@
+import R from 'ramda';
 import React, { PropTypes } from 'react';
-import TodoItem from './TodoItem';
-import TodoForm from './TodoForm';
+import { TodoItem, TodoForm } from './index';
 import { List } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
+
+const RenderTodoItem = R.curry((onTodoClick, onTodoDelete, todo) =>
+	<TodoItem key={todo.id} {...todo} onClick={() => onTodoClick(todo)} onDelete={() => onTodoDelete(todo.id)} />
+);
 
 const TodoList = ({ todos, onTodoAdd, onTodoClick, onTodoDelete }) => (
 	<List>
 		<Subheader>TODO</Subheader>
 		<TodoForm onSubmit={onTodoAdd} />
 		{
-			todos.map(todo =>
-			<TodoItem key={todo.id} {...todo}
-				onClick={() => onTodoClick(todo)}
-				onDelete={() => onTodoDelete(todo.id)} />) 
+			todos.map(RenderTodoItem(onTodoClick, onTodoDelete))
 		}
 	</List>
 );

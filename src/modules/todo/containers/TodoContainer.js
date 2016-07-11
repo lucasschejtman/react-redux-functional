@@ -1,7 +1,7 @@
 import R from 'ramda';
 import { connect } from 'react-redux';
-import TodoList from '../components/TodoList';
-import * as actions from '../actions/actions';
+import { TodoList } from '../components';
+import { actions } from '../index';
 
 const mapStateToProps = (state) => {
 	return R.pick(['todos'], state.todos);

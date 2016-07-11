@@ -8,13 +8,15 @@ import Delete from 'material-ui/svg-icons/action/delete';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Checkbox from 'material-ui/Checkbox';
+import R from 'ramda';
 
 const styles = {
-	block: {
-		maxWidth: 250,
-	},
 	checkbox: {
 		marginBottom: 16,
+	},
+	rightIconMenu: {
+		horizontal: 'left',
+		vertical: 'top'
 	}
 };
 
@@ -30,8 +32,8 @@ const iconButtonElement = (
 
 const rightIconMenu = (props) => (
   	<IconMenu iconButtonElement={iconButtonElement}
-	  	anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-	  	targetOrigin={{horizontal: 'left', vertical: 'top'}}
+	  	anchorOrigin={styles.rightIconMenu}
+	  	targetOrigin={styles.rightIconMenu}
 	>
 		<MenuItem primaryText="Delete" leftIcon={<Delete />} onClick={props.onDelete} />
   	</IconMenu>
