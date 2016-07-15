@@ -1,9 +1,13 @@
+import R from 'ramda';
 import { combineReducers } from 'redux';
-//TODO: Dynamic Load
-import { reducers as todos } from './todo';
+import {reducer as formReducer} from 'redux-form';
 
-const rootReducer = combineReducers({
-	todos
-});
+const reducer = (acc, contract) => {
+	const module = require(`modules/${contract}`);
+	return { ...acc, [module.constants.REDUCER_NAME] : module.reducer };
+}
+
+const reducers = R.reduce(reducer, {}, __MODULES__);
+const rootReducer = combineReducers({ ...reducers, form: formReducer });
 
 export default rootReducer;

@@ -9,6 +9,5 @@ export const lensById = R.compose(lensMatching, R.propEq('id'));
 export const hasSameProp = prop => R.eqProps(prop);
 export const hasSameId = hasSameProp('id');
 export const rejectById = (id, arr) => R.reject(hasSameId({ id }), arr);
-export const isEmpty = R.equals('');
-export const getInputValue = element => element.getValue();
-export const isInputEmpty = R.compose(isEmpty, R.trim, getInputValue);
+export const isStringEmpty = R.compose(R.isEmpty, R.trim);
+export const isNilOrEmpty = R.either(R.isNil, isStringEmpty);

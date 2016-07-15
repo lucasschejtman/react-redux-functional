@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const glob = require('glob');
 
 const paths = {
 	app: path.resolve(__dirname, '../src'),
@@ -11,7 +12,8 @@ const plugins = [
 	new webpack.NoErrorsPlugin(),
 	new webpack.DefinePlugin({
 		'process.env.NODE_ENV': JSON.stringify('dev'),
-		__DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
+		__DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')),
+		__MODULES__: JSON.stringify(glob.sync('*/index.js', { cwd: './src/modules' }))
 	}),
 	new webpack.optimize.OccurenceOrderPlugin()
 ];
@@ -32,7 +34,8 @@ module.exports = {
 		reasons: true
 	},
 	resolve: {
-		extensions: ['', '.js']
+		extensions: ['', '.js'],
+		root: [paths.app, 'node_modules']
 	},
 	module: {
 		loaders: [
