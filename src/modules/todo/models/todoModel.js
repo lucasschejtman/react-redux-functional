@@ -3,9 +3,9 @@ import { notNilOrEmpty } from 'utils/ramda-utils';
 import { strLessThan, strGreaterThan, required, notRequired } from 'utils/validation';
 
 export const transformCompleted = R.evolve({ completed: R.not });
-export const validateFormProp = validator => R.ifElse(validator, notRequired, required);
+export const validateFormField = validator => R.ifElse(validator, notRequired, required);
 
-export const fields = {
+export const formFields = {
 	name: {
 		isValid: R.allPass([notNilOrEmpty, strGreaterThan(0), strLessThan(10)])
  	},
@@ -14,9 +14,9 @@ export const fields = {
 	}
 };
 
-export const validateFields = values => {
-	const reducer = (acc, prop) => {
-		return {...acc, [prop] : validateFormProp(fields[prop].isValid)(values[prop]) }
+export const validateFormFields = values => {
+	const reducer = (acc, field) => {
+		return {...acc, [field] : validateFormField(formFields[field].isValid)(values[field]) }
 	};
 
 	return R.reduce(reducer, {}, Object.keys(values));
