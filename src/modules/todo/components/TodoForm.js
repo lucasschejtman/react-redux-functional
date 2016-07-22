@@ -1,15 +1,8 @@
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import React, { PropTypes } from 'react';
-import { todoModel } from '../models';
+import { fields, validateFields } from '../models/todoModel';
 import RaisedButton from 'material-ui/RaisedButton';
 import { TextField } from 'material-ui';
-
-const fields = ['name', 'description'];
-const validate = values => {
-	return {
-		name: todoModel.validateName(values.name)
-	};
-};
 
 const TodoForm = ({ handleSubmit, fields: { name, description } }) =>
 (
@@ -28,4 +21,4 @@ TodoForm.propTypes = {
  	handleSubmit: PropTypes.func.isRequired
 };
 
-export default reduxForm({ form: 'todoForm', fields, validate })(TodoForm);
+export default reduxForm({ form: 'todoForm', fields: Object.keys(fields), validate: validateFields })(TodoForm);
