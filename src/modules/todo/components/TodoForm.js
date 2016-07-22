@@ -1,22 +1,24 @@
 import { Field, reduxForm } from 'redux-form';
 import React, { PropTypes } from 'react';
-import * as validation from 'utils/validation';
+import { todoModel } from '../models';
 import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
+import { TextField } from 'material-ui';
 
-const fields = ['name'];
+const fields = ['name', 'description'];
 const validate = values => {
 	return {
-		name: validation.notEmpty(values.name)
+		name: todoModel.validateName(values.name)
 	};
 };
 
-const TodoForm = ({ handleSubmit, fields: { name } }) =>
+const TodoForm = ({ handleSubmit, fields: { name, description } }) =>
 (
 	<form onSubmit={handleSubmit}>
 		<div>
-			<input type="text" name="name" {...name} />
-			<RaisedButton type="submit" label="Add" style={{ 'flexGrow': 1 }} />
+			<TextField name="name" hintText="Name" fullWidth={true} {...name} />
+			<TextField name="description" hintText="Description" rowsMax={2} fullWidth={true}
+						multiLine={true} {...description} />
+			<RaisedButton type="submit" label="Add" />
 		</div>
 	</form>
 );

@@ -6,8 +6,9 @@ export const lensMatching = pred => toF => entities => {
 };
 
 export const lensById = R.compose(lensMatching, R.propEq('id'));
-export const hasSameProp = prop => R.eqProps(prop);
-export const hasSameId = hasSameProp('id');
+export const hasSameId = R.eqProps('id');
 export const rejectById = (id, arr) => R.reject(hasSameId({ id }), arr);
+export const strLen = R.curry(str => !str ? 0 : str.length);
 export const isStringEmpty = R.compose(R.isEmpty, R.trim);
 export const isNilOrEmpty = R.either(R.isNil, isStringEmpty);
+export const notNilOrEmpty = R.compose(R.not, isNilOrEmpty);

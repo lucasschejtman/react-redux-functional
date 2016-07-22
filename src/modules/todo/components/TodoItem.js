@@ -43,7 +43,7 @@ const leftCheckbox = (props) => (
 	<Checkbox style={styles.checkbox} {...props} />
 );
 
-const TodoItem = ({ onClick, onDelete, completed, name }) => (
+const TodoItem = ({ onClick, onDelete, completed, name, description }) => (
 	<div>
 		<ListItem
 			style={{
@@ -52,6 +52,8 @@ const TodoItem = ({ onClick, onDelete, completed, name }) => (
 			leftCheckbox={leftCheckbox({ onCheck: onClick, checked: completed })}
 			rightIconButton={rightIconMenu({ onDelete: onDelete })}
 			primaryText={name}
+			secondaryText={description}
+			secondaryTextLines={1}
 		/>
 	    <Divider inset={true} />
     </div>
