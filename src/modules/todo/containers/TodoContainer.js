@@ -1,6 +1,7 @@
 import R from 'ramda';
 import React from 'react';
 import { connect } from 'react-redux';
+import { reset } from 'redux-form';
 import { TodoList, TodoForm } from '../components';
 import { actions } from '../index';
 
@@ -10,7 +11,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onTodoAdd: todo => dispatch(actions.add(todo)),
+		onTodoAdd: todo => { 
+			dispatch(actions.add(todo));
+			return dispatch(reset('todoForm'));
+		},
 		onTodoClick: todo => dispatch(actions.toggle(todo)),
 		onTodoDelete: id => dispatch(actions.remove(id))
 	};

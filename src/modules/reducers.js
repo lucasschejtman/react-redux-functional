@@ -1,6 +1,6 @@
 import R from 'ramda';
 import { combineReducers } from 'redux';
-import {reducer as formReducer} from 'redux-form';
+import { reducer as formReducer } from 'redux-form';
 
 const reducer = (acc, contract) => {
 	const module = require(`modules/${contract}`);
