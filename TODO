@@ -1,6 +1,4 @@
 Dynamic Routing
-Flexbox
-Radium - No much support for stateless components
+Radium - No much support for stateless components yet
 Server Side Rendering
 react-redux-router
-redux-form

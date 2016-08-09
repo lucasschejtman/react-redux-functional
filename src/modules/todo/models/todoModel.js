@@ -1,6 +1,6 @@
 import R from 'ramda';
-import { notNilOrEmpty } from 'utils/ramda-utils';
-import { strLessThan, strGreaterThan, required, notRequired } from 'utils/validation';
+import { notNilOrEmpty } from '../../../utils/ramda-utils';
+import { strLessThan, strGreaterThan, required, notRequired } from '../../../utils/validation';
 
 export const transformCompleted = R.evolve({ completed: R.not });
 export const validateFormField = validator => R.ifElse(validator, notRequired, required);

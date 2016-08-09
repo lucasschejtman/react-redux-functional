@@ -1,5 +1,5 @@
 import R from 'ramda';
-import * as Ru from 'utils/ramda-utils';
+import * as Ru from '../../../utils/ramda-utils';
 import { transformCompleted } from './todoModel';
 
 export const add = (todos, todo) => {
