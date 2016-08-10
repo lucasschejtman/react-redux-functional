@@ -32,11 +32,7 @@ module.exports = {
 	stats: {
 		colors: true,
 		reasons: true
-	},
-	resolve: {
-		extensions: ['', '.js'],
-		root: [paths.app, 'node_modules']
-	},
+	},	
 	module: {
 		loaders: [
 			{
@@ -46,6 +42,9 @@ module.exports = {
 				exclude: /node_modules/
 			}
 		]
+	},
+	node: {
+	  	fs: "empty"
 	},
 	plugins: plugins,
 	devServer: {

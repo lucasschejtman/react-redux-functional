@@ -14,7 +14,7 @@ test('todoReducer should toggle the completed property of a todo', t => {
 	t.deepEqual(newState, { todos: [ { id: 1, completed: true } ] });
 });
 
-test('todoReducer should a todo', t => {
+test('todoReducer should a todo by id', t => {
 	const newState = target(initialState, { type: actionTypes.REMOVE, payload: 1 });
 	t.deepEqual(newState, { todos: [ ] });
 });

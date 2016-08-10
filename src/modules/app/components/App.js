@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 const App = ({ children }) => (
-	<div class="row">
+	<div>
 		{children}
 	</div>
 );
