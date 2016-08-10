@@ -1,6 +1,6 @@
 import { test } from 'ava';
-import { actionTypes, models } from '../../index';
-import target from '../../reducers/todoReducer';
+import { actionTypes, models } from '../../../../src/modules/todo/index';
+import target from '../../../../src/modules/todo/reducers/todoReducer';
 
 const initialState = { todos: [ { id: 1, completed: false } ] };
 
