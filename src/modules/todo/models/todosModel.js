@@ -4,7 +4,7 @@ import { transformCompleted } from './todoModel';
 
 export const add = (todos, todo) => {
 	const toInsert = { id: Math.random(), ...todo, completed: false };
-	return R.insert(todos.length, toInsert, todos);
+	return R.concat([toInsert], todos);
 };
 
 export const remove = (todos, todoId) => {
