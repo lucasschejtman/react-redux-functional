@@ -1,20 +1,33 @@
 import { test } from 'ava';
-import { actionTypes, models } from '../../../../src/modules/todo/index';
-import target from '../../../../src/modules/todo/reducers/todoReducer';
+import sinon from 'sinon';
+import proxyquire from 'proxyquire';
+import * as todosModel from '../../../../src/modules/todo/models/todosModel';
+import * as actionTypes from '../../../../src/modules/todo/actions/actionTypes';
 
-const initialState = { todos: [ { id: 1, completed: false } ] };
+const stubAndSpyOn = fn => {
+	const todosModelStub = sinon.stub(todosModel, fn, () => {});
+	return {
+		stub: todosModelStub,
+		target: proxyquire('../../../../src/modules/todo/reducers/todoReducer', {
+					'../models/todosModel': todosModelStub
+				}).default
+	};
+}
 
 test('todoReducer should add a todo', t => {
-	const newState = target(initialState, { type: actionTypes.ADD, payload: { id: 2, completed: true } });
-	t.deepEqual(newState, { todos: [ { id: 2, completed: false }, { id: 1, completed: false } ] });
+	const testObj = stubAndSpyOn('add');
+	testObj.target({}, { type: actionTypes.ADD, payload: { } });
+	t.is(testObj.stub.add.calledOnce, true);
 });
 
 test('todoReducer should toggle the completed property of a todo', t => {
-	const newState = target(initialState, { type: actionTypes.TOGGLE_COMPLETE, payload: { id: 1, completed: false } });
-	t.deepEqual(newState, { todos: [ { id: 1, completed: true } ] });
+	const testObj = stubAndSpyOn('toggleCompleted');
+	testObj.target({}, { type: actionTypes.TOGGLE_COMPLETE, payload: { } });
+	t.is(testObj.stub.toggleCompleted.calledOnce, true);
 });
 
 test('todoReducer should a todo by id', t => {
-	const newState = target(initialState, { type: actionTypes.REMOVE, payload: 1 });
-	t.deepEqual(newState, { todos: [ ] });
+	const testObj = stubAndSpyOn('remove');
+	testObj.target({}, { type: actionTypes.REMOVE, payload: { } });
+	t.is(testObj.stub.remove.calledOnce, true);
 });
