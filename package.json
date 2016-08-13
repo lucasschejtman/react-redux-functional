@@ -13,6 +13,7 @@
   "license": "ISC",
   "scripts": {
     "test": "ava",
+    "coverage": "nyc --reporter=html npm test",
     "dev": "webpack-dev-server --config ./webpack/webpack.config.dev.js --hot --inline --progress"
   },
   "ava": {
@@ -41,6 +42,7 @@
     "enzyme": "^2.4.1",
     "file-loader": "0.8.5",
     "jsdom": "^9.4.1",
+    "nyc": "^8.0.0",
     "proxyquire": "^1.7.10",
     "react-addons-test-utils": "^15.3.0",
     "react-hot-loader": "1.3.0",
