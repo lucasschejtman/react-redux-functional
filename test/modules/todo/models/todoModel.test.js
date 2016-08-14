@@ -1,5 +1,6 @@
 import { test } from 'ava';
 import { models } from '../../../../src/modules/todo/index';
+import { required, notRequired } from '../../../../src/utils/validation';
 
 const { todoModel } = models;
 
@@ -31,4 +32,18 @@ test('todoModel description field isValid false when not meeting criteria', t =>
 	const description = "";
 	const result = todoModel.formFields.description.isValid(description);
 	t.is(result, false);
+});
+
+test('todoModel validateFormFields validates all fields', t => {
+	const values = { name: 'name', description: 'description' };
+	const expected = { name: notRequired(), description: notRequired() };
+	const result = todoModel.validateFormFields(values);
+	t.deepEqual(result, expected);
+});
+
+test('todoModel validateFormFields validates all fields (no valid values)', t => {
+	const values = { name: '', description: '' };
+	const expected = { name: required(), description: required() };
+	const result = todoModel.validateFormFields(values);
+	t.deepEqual(result, expected);
 });
