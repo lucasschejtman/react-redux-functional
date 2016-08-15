@@ -1,6 +1,6 @@
 import * as c from '../constants/constants';
 
-const createActionType = type => `${c.MODULE_NAME}/${type}`;
+export const createActionType = type => `${c.MODULE_NAME}/${type}`;
 
 export const ADD = createActionType('ADD');
 export const REMOVE = createActionType('REMOVE');
