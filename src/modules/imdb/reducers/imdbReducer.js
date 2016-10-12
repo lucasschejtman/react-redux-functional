@@ -4,7 +4,7 @@ import initialState from './initialState';
 
 const reducer = handleActions({
   [t.SEARCH]: (state, action) => ({
-
+    id: action.payload.id
   })
 }, initialState);
 

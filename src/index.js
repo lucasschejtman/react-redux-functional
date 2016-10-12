@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { ApolloProvider } from 'react-apollo';
 import configureStore from './redux/configureStore';
 import { Router, browserHistory } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -9,7 +9,7 @@ import routes from './routes';
 
 injectTapEventPlugin();
 
-const store = configureStore();
+const configuration = configureStore();
 const rootEl = document.getElementById('app');
 
 let componentEl;
@@ -33,9 +33,9 @@ if(process.env.NODE_ENV !== 'production') {
 
 ReactDOM.render(
 	<MuiThemeProvider>
-		<Provider store={store}>
+		<ApolloProvider client={configuration.client} store={configuration.store}>
 			{componentEl}
-		</Provider>
+		</ApolloProvider>
 	</MuiThemeProvider>,
 	rootEl
 );

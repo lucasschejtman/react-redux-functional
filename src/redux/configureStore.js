@@ -1,9 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../modules/reducers';
+import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { persistState } from 'redux-devtools';
 
 function configureStore(initialState) {
-	let middleware = applyMiddleware();
+	const client = new ApolloClient({
+  	networkInterface: createNetworkInterface('http://localhost:8080/graphql'),
+	});
+	let middleware = applyMiddleware(client.middleware());
 	let enhancer;
 
 	if(process.env.NODE_ENV !== 'production') {
@@ -29,7 +33,7 @@ function configureStore(initialState) {
 		});
 	}
 
-	return store;
+	return { client, store };
 }
 
 export default configureStore;

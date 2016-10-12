@@ -1,0 +1,1 @@
+export ImdbSearchForm from './ImdbSearchForm';

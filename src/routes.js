@@ -3,10 +3,12 @@ import { Route, IndexRoute, Redirect } from 'react-router';
 import App from './modules/app/components/App';
 //TODO: Dynamic Load
 import Todo from './modules/todo/containers/TodoContainer';
+import Imdb from './modules/imdb/containers/ImdbSearchContainer';
 
 const routes = () => (
 	<Route path="/" component={App}>
 		<IndexRoute component={Todo} />
+		<Route path="/imdb" component={Imdb} />
 		<Redirect from="*" to="404" />
 	</Route>
 );
