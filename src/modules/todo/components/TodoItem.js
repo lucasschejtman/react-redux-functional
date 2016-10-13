@@ -57,7 +57,7 @@ const TodoItem = ({ onClick, onDelete, completed, name, description }) => (
 		/>
 	    <Divider inset={true} />
     </div>
-)
+);
 
 TodoItem.propTypes = {
  	onClick: PropTypes.func.isRequired,

@@ -1,13 +1,12 @@
-import { reduxForm } from 'redux-form';
 import React, { PropTypes } from 'react';
-//import { formFields, validateFormFields } from '../models/todoModel';
+
 import RaisedButton from 'material-ui/RaisedButton';
 import { TextField } from 'material-ui';
+import { reduxForm } from 'redux-form';
 
 const formConfig = {
 	form: 'imdbSearchForm',
-	fields: /*Object.keys(formFields)*/ ['id'],
-	//validate: validateFormFields
+	fields: ['id']
 };
 
 const ImdbSearchForm = ({ handleSubmit, fields: { id } }) =>
