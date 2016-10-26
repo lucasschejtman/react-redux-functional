@@ -32,7 +32,7 @@ module.exports = {
 	stats: {
 		colors: true,
 		reasons: true
-	},	
+	},
 	module: {
 		loaders: [
 			{
@@ -40,6 +40,18 @@ module.exports = {
 				loaders: ['react-hot', 'babel'],
 				include: paths.app,
 				exclude: /node_modules/
+			},
+			{
+				test: /\.md?$/,
+				loader: 'ignore-loader'
+			},
+			{
+				test: /\.map?$/,
+				loader: 'ignore-loader'
+			},
+			{
+				test: /\.json?$/,
+				loader: 'json-loader'
 			}
 		]
 	},

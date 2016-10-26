@@ -41,7 +41,9 @@
     "babel-preset-stage-1": "6.5.0",
     "enzyme": "^2.4.1",
     "file-loader": "0.8.5",
+    "ignore-loader": "^0.1.1",
     "jsdom": "^9.4.1",
+    "json-loader": "^0.5.4",
     "nyc": "^8.0.0",
     "proxyquire": "^1.7.10",
     "react-addons-test-utils": "^15.3.0",
@@ -72,6 +74,7 @@
     "redux": "3.5.2",
     "redux-actions": "^0.10.0",
     "redux-form": "^5.3.1",
-    "redux-promise": "^0.5.3"
+    "redux-promise": "^0.5.3",
+    "systemjs": "^0.19.40"
   }
 }
