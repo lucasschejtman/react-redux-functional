@@ -9,6 +9,7 @@ export default {
       "identifier": "card",
       "name": "Card",
       "version": "1",
+      filename: 'ListComponent.js',
       "props": {
         header: {
           title: "Lucas Schejtman",
